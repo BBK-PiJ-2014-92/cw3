@@ -8,19 +8,11 @@ public class ReturnObjectImpl implements ReturnObject {
 	}
 
 	public boolean hasError() {
-		if (currentError == ErrorMessage.NO_ERROR) {
-			return false;
-		}else {
-			return true;
-		}
+		return (currentError != ErrorMessage.NO_ERROR);
 	}
 
 	public ErrorMessage getError() {
-		if (hasError() == false) {
-			return ErrorMessage.NO_ERROR;
-		}else {
-			return currentError;
-		}
+		return currentError;
 	}
 
 	public Object getReturnValue() {
