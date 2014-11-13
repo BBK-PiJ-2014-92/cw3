@@ -30,4 +30,8 @@ public class ReturnObjectImpl implements ReturnObject {
 			return myObject;
 		}
 	}
+
+	public void setError(ErrorMessage error) {
+		currentError = error;
+	}
 }
