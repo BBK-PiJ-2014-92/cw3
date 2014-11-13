@@ -1,9 +1,5 @@
-public ArrayList implements List {
-	private Object[] objectArray;
-
-	public ArrayList() {
-		this.objectArray = new Object[10];
-	}
+public class ArrayList implements List {
+	private Object[] objectArray = new Object[10];
 
 	public boolean isEmpty() {
 		if(objectArray == null) {
@@ -18,7 +14,7 @@ public ArrayList implements List {
 	}
 
 	public ReturnObject get(int index) {
-		new ReturnObjectImpl array = new ReturnObjectImpl(objectArray);
+		ReturnObjectImpl array = new ReturnObjectImpl(objectArray);
 		if(objectArray.length() == 0) {
 			array.setError(ErrorMessage.EMPTY_STRUCTURE);
 			return array;
