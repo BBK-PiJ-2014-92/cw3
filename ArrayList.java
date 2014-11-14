@@ -13,23 +13,19 @@ public class ArrayList implements List {
 	public ReturnObject get(int index) {
 		ReturnObjectImpl array = new ReturnObjectImpl(objectArray[index]);
 		array.setErrorList(isEmpty(), size, index);
-		if (array.getError() != ErrorMessage.NO_ERROR) {
-			return array.gerError();
-		}else {
-			return array.getReturnValue();
-		}
+		return array;
 	}
 
 	public ReturnObject remove(int index) {
 		ReturnObjectImpl array = new ReturnObjectImpl(objectArray[index]);
 		array.setErrorList (isEmpty(), size, index);
 		if (array.getError() != ErrorMessage.NO_ERROR) {
-			return array.getError();
+			return array;
 		}else{
-			for(int i = index, i < size(), i++) {
+			for(int i = index; i < size(); i++) {
 				objectArray[i] = objectArray[i+1];
-			}i--;
-			return array.getReturnValue();
+			}size--;
+			return array;
 		}
 	}
 
@@ -37,12 +33,12 @@ public class ArrayList implements List {
 		ReturnObjectImpl array = new ReturnObjectImpl(item);
 		array.setErrorList (isEmpty(), size, index, item);
 		if (array.getError() != ErrorMessage.NO_ERROR) {
-			return array.getError();
+			return array;
 		}else {
-			for (int i = index, i < size(), i++) {
+			for (int i = index; i < size(); i++) {
 				objectArray[i+1] = objectArray[i];
 			}objectArray[index] = item;
-			i++;
+			size++;
 			return null;
 		}
 	}
@@ -51,10 +47,10 @@ public class ArrayList implements List {
 		ReturnObjectImpl array = new ReturnObjectImpl(item);
 		array.setErrorList (isEmpty(), size, item);
 		if (array.getError() != ErrorMessage.NO_ERROR) {
-			return array.getError();
+			return array;
 		}else {
 			objectArray[size] = item;
-			i++;
+			size++;
 			return null;
 		}
 	}
