@@ -46,3 +46,16 @@ public class ArrayList implements List {
 			return null;
 		}
 	}
+
+	public ReturnObject add(Object item) {
+		ReturnObjectImpl array = new ReturnObjectImpl(item);
+		array.setErrorList (isEmpty(), size, item);
+		if (array.getError() != ErrorMessage.NO_ERROR) {
+			return array.getError();
+		}else {
+			objectArray[size] = item;
+			i++;
+			return null;
+		}
+	}
+}
