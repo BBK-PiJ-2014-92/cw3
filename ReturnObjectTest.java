@@ -2,7 +2,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class ReturnObjectTest {
-	private String words;
+	private Object words;
 	private ReturnObjectImpl test;
 	private ErrorMessage noError = ErrorMessage.NO_ERROR;
 	private ErrorMessage empty = ErrorMessage.EMPTY_STRUCTURE;
@@ -29,6 +29,7 @@ public class ReturnObjectTest {
 	public void testNoError() {
 		ErrorMessage actual = test.getError();
 		assertEquals(actual, noError);
+
 	}
 
 	@Test
@@ -36,9 +37,11 @@ public class ReturnObjectTest {
 		test.setErrorList(true, 10, 5, words);
 		ErrorMessage actual = test.getError();
 		assertEquals(actual, empty);
+
 		test.setErrorList(true, 10, 5);
 		actual = test.getError();
 		assertEquals(actual, empty);
+
 		test.setErrorList(true, 10, words);
 		assertEquals(actual, empty);
 	}
@@ -48,6 +51,7 @@ public class ReturnObjectTest {
 		test.setErrorList(false, 5, 10);
 		ErrorMessage actual = test.getError();
 		assertEquals(actual, oob);
+
 		test.setErrorList(false, 5, 10, words);
 		actual = test.getError();
 		assertEquals(actual, oob);
@@ -58,8 +62,21 @@ public class ReturnObjectTest {
 		test.setErrorList(false, 10, 5, null);
 		ErrorMessage actual = test.getError();
 		assertEquals(actual, invalid);
+
 		words = null;
 		test.setErrorList(false, 10, words);
 		assertEquals(actual, invalid);
+	}
+
+	@Test
+	public void testGetReturnValue() {
+		Object actual = test.getReturnValue();
+		Object expected = "Test";
+		assertEquals(actual, expected);
+
+		testEmpty();
+		actual = test.getReturnValue();
+		expected = null;
+		assertEquals(actual, expected);
 	}
 }
