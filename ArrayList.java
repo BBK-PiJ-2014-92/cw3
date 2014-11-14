@@ -24,7 +24,8 @@ public class ArrayList implements List {
 		}else{
 			for(int i = index; i < size(); i++) {
 				objectArray[i] = objectArray[i+1];
-			}size--;
+			}
+			size--;
 			return array;
 		}
 	}
@@ -37,7 +38,8 @@ public class ArrayList implements List {
 		}else {
 			for (int i = index; i < size(); i++) {
 				objectArray[i+1] = objectArray[i];
-			}objectArray[index] = item;
+			}
+			objectArray[index] = item;
 			size++;
 			return null;
 		}
@@ -53,5 +55,17 @@ public class ArrayList implements List {
 			size++;
 			return null;
 		}
+	}
+
+	private boolean isFull() {
+		return (objectArray.length - size < 1);
+	}
+
+	private void moreSpace() {
+		Object[] bigObjectArray = new Object[size + 1];
+		for (int i = 0; i < size; i++) {
+			bigObjectArray[i] = objectArray[i];
+		}
+		objectArray = bigObjectArray;
 	}
 }
