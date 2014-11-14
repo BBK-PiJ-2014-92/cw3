@@ -36,6 +36,9 @@ public class ArrayList implements List {
 		if (array.getError() != ErrorMessage.NO_ERROR) {
 			return array;
 		}else {
+			if (isFull()) {
+				moreSpace();
+			}
 			for (int i = index; i < size(); i++) {
 				objectArray[i+1] = objectArray[i];
 			}
@@ -51,6 +54,9 @@ public class ArrayList implements List {
 		if (array.getError() != ErrorMessage.NO_ERROR) {
 			return array;
 		}else {
+			if (isFull()) {
+				moreSpace();
+			}
 			objectArray[size] = item;
 			size++;
 			return null;
