@@ -16,7 +16,7 @@ public class LinkedList implements List {
 			size++;
 			tempNode = tempNode.getNextNode();
 		}
-		while (tempNode != null);
+		while (tempNode.getNextNode() != null);
 		return size;
 	}
 
@@ -65,4 +65,34 @@ public class LinkedList implements List {
 		if (linked.getError() != ErrorMessage.NO_ERROR) {
 			return linked;
 		}else {
+			Node newNode = new Node(item);
 			if (index = 0) {
+				newNode.setNextNode(tempNode);
+				listHead = newNode;
+			}else {
+				for (int i = 0; i < index - 1; i++) {
+					tempNode = tempNode.getNextNode();
+				}
+				newNode.setNextNode(tempNode.getNextNode());
+				tempNode.setNextNode(newNode);
+				return null;
+			}
+		}
+	}
+
+	public ReturnObject add(Object item) {
+		Node tempNode = listHead;
+		ReturnObjectImpl linked = new ReturnObjectImpl(tempNode);
+		linked.setErrorList(isEmpty(), size(), item);
+		if (linked.getError() != ErrorMessage.NO_ERROR) {
+			return linked;
+		}else {
+			Node newNode = new Node(item);
+			while (tempNode.getNextNode() != null) {
+				tempNode = tempNode.getNextNode();
+			}
+			tempNode.setNextNode(newNode);
+			return null;
+		}
+	}
+}
