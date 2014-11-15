@@ -57,3 +57,12 @@ public class LinkedList implements List {
 			}
 		}
 	}
+
+	public ReturnObject add(int index, Object item) {
+		Node tempNode = listHead;
+		ReturnObjectImpl linked = new ReturnObjectImpl(tempNode);
+		linked.setErrorList(isEmpty(), size(), index, item);
+		if (linked.getError() != ErrorMessage.NO_ERROR) {
+			return linked;
+		}else {
+			if (index = 0) {
