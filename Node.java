@@ -1,21 +1,21 @@
 public class Node {
 	private Object value;
-	private Node next;
+	private Node nextNode;
 
 	public Node(Object value) {
 		this.value = value;
-		next = null;
+		nextNode = null;
 	}
 
 	public Object getValue() {
 		return value;
 	}
 
-	public void setNext(Node newNode) {
-		next = newNode;
+	public void setNextNode(Node newNode) {
+		nextNode = newNode;
 	}
 
-	public Node getNext() {
-		return next;
+	public Node getNextNode() {
+		return nextNode;
 	}
 }
