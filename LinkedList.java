@@ -2,7 +2,7 @@ public class LinkedList implements List {
 	private Node listHead;
 
 	public LinkedList() {
-		head = null;
+		listHead = null;
 	}
 
 	public boolean isEmpty() {
@@ -43,7 +43,7 @@ public class LinkedList implements List {
 		if (linked.getError() != ErrorMessage.NO_ERROR) {
 			return linked;
 		}else {
-			if (index = 0) {
+			if (index == 0) {
 				listHead = listHead.getNextNode();
 				return linked = new ReturnObjectImpl(listHead);
 			}else {
@@ -66,9 +66,10 @@ public class LinkedList implements List {
 			return linked;
 		}else {
 			Node newNode = new Node(item);
-			if (index = 0) {
+			if (index == 0) {
 				newNode.setNextNode(tempNode);
 				listHead = newNode;
+				return null;
 			}else {
 				for (int i = 0; i < index - 1; i++) {
 					tempNode = tempNode.getNextNode();
