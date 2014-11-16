@@ -37,9 +37,4 @@ public class ReturnObjectImpl implements ReturnObject {
 		Object item = "not null";
 		setErrorList(isEmpty, size, index, item);
 	}
-
-	public void setErrorList(boolean isEmpty, int size, Object item) { //Without index
-		int index = size--;
-		setErrorList(isEmpty, size, index, item);
-	}
 }
