@@ -1,5 +1,5 @@
 public abstract class AbstractList implements List{
-	private List listType;
+	protected List listType;
 
 	public AbstractList(List listType) {
 		this.listType = listType;
@@ -29,7 +29,4 @@ public abstract class AbstractList implements List{
 		return listType.add(item);
 	}
 
-	public List getListType() {
-		return listType;
-	}
 }
