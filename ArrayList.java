@@ -12,15 +12,19 @@ public class ArrayList implements List {
 
 	public ReturnObject get(int index) {
 		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
-		(ReturnObjectImpl)array).setErrorList(isEmpty(), size, index);
+		if (isEmpty()) {
+			array.setError(ErrorMessage.EMPTY_STRUCTURE);
+		}else if (index < 0 || index >= size()) {
+			array.setError(ErrorMessage.OUT_OF_BOUNDS);
 		return array;
 	}
 
 	public ReturnObject remove(int index) {
 		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
-		((ReturnObjectImpl)array).setErrorList (isEmpty(), size, index);
-		if (array.getError() != ErrorMessage.NO_ERROR) {
-			return array;
+		if (isEmpty()) {
+			return array.setError(ErrorMessage.EMPTY_STRUCTURE);
+		}else if (index < 0 || index >= size()) {
+			return array.setError(ErrorMessage.OUT_OF_BOUNDS);
 		}else{
 			for(int i = index; i < size(); i++) {
 				objectArray[i] = objectArray[i+1];
@@ -32,9 +36,10 @@ public class ArrayList implements List {
 
 	public ReturnObject add(int index, Object item) {
 		ReturnObject array = new ReturnObjectImpl(item);
-		((ReturnObjectImpl)array).setErrorList (isEmpty(), size, index, item);
-		if (array.getError() != ErrorMessage.NO_ERROR) {
-			return array;
+		if (index < 0 || index >= size()) {
+			return array.setError(ErrorMessage.OUT_OF_BOUNDS);
+		}else if (item == null) {
+			return array.setError(ErrorMessage.INVALID_ARGUMENT);
 		}else {
 			if (isFull()) {
 				moreSpace();
@@ -47,20 +52,21 @@ public class ArrayList implements List {
 			return null;
 		}
 	}
+	
 
 	public ReturnObject add(Object item) {
 		ReturnObject array = new ReturnObjectImpl(item);
-		((ReturnObjectImpl)array).setErrorList (isEmpty(), size, item);
-		if (array.getError() != ErrorMessage.NO_ERROR) {
-			return array;
-		}else {
+		if (item == null) {
+			return array.setError(ErrorMessage.INVALID_ARGUMENT);
+		}else{
 			if (isFull()) {
 				moreSpace();
 			}
-			objectArray[size] = item;
-			size++;
+			objectArray[size()] = item;
+			size++
 			return null;
 		}
+		
 	}
 
 	private boolean isFull() {
@@ -74,4 +80,6 @@ public class ArrayList implements List {
 		}
 		objectArray = bigObjectArray;
 	}
+	
+	private void
 }
