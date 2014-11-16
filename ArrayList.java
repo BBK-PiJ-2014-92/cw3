@@ -24,27 +24,23 @@ public class ArrayList implements List {
 		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
 		if (isEmpty()) {
 			((ReturnObjectImpl)array).setError(ErrorMessage.EMPTY_STRUCTURE);
-			return array;
 		}else if (index < 0 || index >= size()) {
 			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-			return array;
 		}else{
 			for(int i = index; i < size(); i++) {
 				objectArray[i] = objectArray[i+1];
 			}
 			size--;
-			return array;
 		}
+		return array;
 	}
 
 	public ReturnObject add(int index, Object item) {
 		ReturnObject array = new ReturnObjectImpl(item);
 		if (index < 0 || index >= size()) {
 			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-			return array;
 		}else if (item == null) {
 			((ReturnObjectImpl)array).setError(ErrorMessage.INVALID_ARGUMENT);
-			return array;
 		}else {
 			if (isFull()) {
 				moreSpace();
@@ -54,8 +50,9 @@ public class ArrayList implements List {
 			}
 			objectArray[index] = item;
 			size++;
-			return null;
+			array = new ReturnObjectImpl(null);
 		}
+		return array;
 	}
 	
 
@@ -63,16 +60,15 @@ public class ArrayList implements List {
 		ReturnObject array = new ReturnObjectImpl(item);
 		if (item == null) {
 			((ReturnObjectImpl)array).setError(ErrorMessage.INVALID_ARGUMENT);
-			return array;
 		}else{
 			if (isFull()) {
 				moreSpace();
 			}
 			objectArray[size()] = item;
 			size++;
-			return null;
+			array = new ReturnObjectImpl(null);
 		}
-		
+		return array;
 	}
 
 	private boolean isFull() {
