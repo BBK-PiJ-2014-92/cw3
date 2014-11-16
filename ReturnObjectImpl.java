@@ -23,18 +23,7 @@ public class ReturnObjectImpl implements ReturnObject {
 		}
 	}
 
-	public void setErrorList(boolean isEmpty, int size, int index, Object item) {
-		if(isEmpty) {
-			currentError = ErrorMessage.EMPTY_STRUCTURE;
-		}else if (index >= size || index < 0) {
-			currentError =  ErrorMessage.INDEX_OUT_OF_BOUNDS;
-		}else if (item == null) {
-			currentError = ErrorMessage.INVALID_ARGUMENT;
-		}
-	}
-
-	public void setErrorList(boolean isEmpty, int size, int index) { //Without item
-		Object item = "not null";
-		setErrorList(isEmpty, size, index, item);
+	public void setError(ErrorMessage error) {
+		currentError = error;
 	}
 }
