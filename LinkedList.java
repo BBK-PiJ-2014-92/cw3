@@ -1,8 +1,10 @@
 public class LinkedList implements List {
 	private Node listHead;
+	private int size;
 
 	public LinkedList() {
 		listHead = null;
+		size = 0;
 	}
 
 	public boolean isEmpty() {
@@ -10,41 +12,33 @@ public class LinkedList implements List {
 	}
 
 	public int size() {
-		int size = 0;
-		Node tempNode = listHead;
-		do{
-			size++;
-			tempNode = tempNode.getNextNode();
-		}
-		while (tempNode.getNextNode() != null);
 		return size;
 	}
 
 	public ReturnObject get(int index) {
 		Node tempNode = listHead;
 		ReturnObject linked = new ReturnObjectImpl(tempNode);
-		((ReturnObjectImpl)linked).setErrorList(isEmpty(), size(), index);
-		if (linked.getError() != ErrorMessage.NO_ERROR) {
-			return linked;
-		}else {
+		((ReturnObjectImpl)linked).setEmpty(isEmpty());
+		((ReturnObjectImpl)linked).setOOB(size(), index);
+		if (linked.getError() == ErrorMessage.NO_ERROR) {		
 			for (int i = 0; i < index; i++) {
 				tempNode = tempNode.getNextNode();
 			}
 			linked = new ReturnObjectImpl(tempNode);
-			return linked;
 		}
+		return linked;
 	}
 
 	public ReturnObject remove(int index) {
 		Node tempNode = listHead;
 		ReturnObject linked = new ReturnObjectImpl(tempNode);
-		((ReturnObjectImpl)linked).setErrorList(isEmpty(), size(), index);
-		if (linked.getError() != ErrorMessage.NO_ERROR) {
-			return linked;
-		}else {
+		((ReturnObjectImpl)linked).setEmpty(isEmpty());
+		((ReturnObjectImpl)linked).setOOB(size(), index);
+		if (linked.getError() == ErrorMessage.NO_ERROR) {
 			if (index == 0) {
 				listHead = listHead.getNextNode();
-				return linked = new ReturnObjectImpl(listHead);
+				linked = new ReturnObjectImpl(listHead);
+				size--;
 			}else {
 				for (int i = 0; i < index - 1; i++) {
 					tempNode = tempNode.getNextNode();
@@ -52,47 +46,51 @@ public class LinkedList implements List {
 				Node removedNode = tempNode.getNextNode();
 				tempNode.setNextNode(removedNode.getNextNode());
 				removedNode.setNextNode(null);
-				return linked = new ReturnObjectImpl(removedNode);
+				linked = new ReturnObjectImpl(removedNode);
+				size--;
 			}
 		}
+		return linked;
 	}
 
 	public ReturnObject add(int index, Object item) {
 		Node tempNode = listHead;
 		ReturnObject linked = new ReturnObjectImpl(tempNode);
-		((ReturnObjectImpl)linked).setErrorList(isEmpty(), size(), index, item);
-		if (linked.getError() != ErrorMessage.NO_ERROR) {
-			return linked;
-		}else {
+		((ReturnObjectImpl)linked).setOOB(size(), index);
+		((ReturnObjectImpl)linked).setInvalid(item);
+		if (linked.getError() == ErrorMessage.NO_ERROR) {
 			Node newNode = new Node(item);
 			if (index == 0) {
 				newNode.setNextNode(tempNode);
 				listHead = newNode;
-				return null;
+				linked = new ReturnObjectImpl(null);
+				size++;
 			}else {
 				for (int i = 0; i < index - 1; i++) {
 					tempNode = tempNode.getNextNode();
 				}
 				newNode.setNextNode(tempNode.getNextNode());
 				tempNode.setNextNode(newNode);
-				return null;
+				linked = new ReturnObjectImpl(null);
+				size++;
 			}
 		}
+		return linked;
 	}
 
 	public ReturnObject add(Object item) {
 		Node tempNode = listHead;
 		ReturnObject linked = new ReturnObjectImpl(tempNode);
-		((ReturnObjectImpl)linked).setErrorList(isEmpty(), size(), item);
-		if (linked.getError() != ErrorMessage.NO_ERROR) {
-			return linked;
-		}else {
+		((ReturnObjectImpl)linked).setInvalid(item);
+		if (linked.getError() == ErrorMessage.NO_ERROR) {
 			Node newNode = new Node(item);
 			while (tempNode.getNextNode() != null) {
 				tempNode = tempNode.getNextNode();
 			}
 			tempNode.setNextNode(newNode);
-			return null;
+			linked = new ReturnObjectImpl(null);
+			size++;
 		}
+		return linked;
 	}
 }
