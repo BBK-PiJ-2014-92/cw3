@@ -4,7 +4,7 @@ public class SampleableListImpl extends AbstractList implements SampleableList {
 	}
 
 	public SampleableList sample() {
-		SampleableList sample = new SampleableListImpl (getListType());
+		SampleableList sample = new SampleableListImpl (listType);
 		for (int i = 0; i < size(); i += 2) {
 			sample.add(get(i));
 		}
