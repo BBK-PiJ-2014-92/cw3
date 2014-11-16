@@ -1,29 +1,17 @@
 import org.junit.*;
 import static org.junit.Assert.*;
 
-public class ListTest{
+public class ArrayListTest{
 	private List arrayTest;
-	//private List linkedTest;
 
-	public ListTest() {
+
+	public ArrayListTest() {
 		arrayTest = new ArrayList();
-		//linkedTest = new LinkedList(); 
 	}
-	
-	//@Before
-	//public void buildUp() {
-		
-		//linkedTest.add("1");
-		//linkedTest.add("2");
-		//linkedTest.add("3");
-		//linkedTest.add("4");
-		//linkedTest.add("5");
-	//}
 	
 	@After
 	public void cleanUp() {
 		arrayTest = null;
-		//linkedTest = null;
 	}
 
 	@Test
@@ -113,9 +101,7 @@ public class ListTest{
 		arrayTest.remove(0);
 		actual = arrayTest.isEmpty();
 		assertTrue(actual); //works
-		
-		//actual = linkedTest.isEmpty();
-		//assertTrue(actual);
+
 	}
 
 	@Test
@@ -137,9 +123,7 @@ public class ListTest{
 		arrayTest.remove(0);
 		actual = arrayTest.size();
 		assertEquals(actual, expected); //works
-		
-		//actual = linkedTest.size();
-		//assertEquals(actual, expected);
+
 	}
 	
 	@Test
@@ -159,9 +143,7 @@ public class ListTest{
 		
 		actual = arrayTest.remove(2).getReturnValue();
 		assertNull(actual); //works
-		
-		
-		
+
 	}
 
 }
