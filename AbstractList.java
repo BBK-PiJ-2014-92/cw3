@@ -9,6 +9,10 @@ public abstract class AbstractList implements List{
 		return listType.isEmpty();
 	}
 
+	public ReturnObject get(int index) {
+		return listType.get(index);
+	}
+
 	public int size() {
 		return listType.size();
 	}
