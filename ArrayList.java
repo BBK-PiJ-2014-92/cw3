@@ -12,21 +12,16 @@ public class ArrayList implements List {
 
 	public ReturnObject get(int index) {
 		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
-		if (isEmpty()) {
-			((ReturnObjectImpl)array).setError(ErrorMessage.EMPTY_STRUCTURE);
-		}else if (index < 0 || index >= size()) {
-			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-		}
+		((ReturnObjectImpl)array).setEmpty(isEmpty());
+		((ReturnObjectImpl)array).setOOB(size(), index);
 		return array;
 	}
 
 	public ReturnObject remove(int index) {
 		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
-		if (isEmpty()) {
-			((ReturnObjectImpl)array).setError(ErrorMessage.EMPTY_STRUCTURE);
-		}else if (index < 0 || index >= size()) {
-			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-		}else{
+		((ReturnObjectImpl)array).setEmpty(isEmpty());
+		((ReturnObjectImpl)array).setOOB(size(), index);
+		if (array.getError() == ErrorMessage.NO_ERROR) {
 			for(int i = index; i < size(); i++) {
 				objectArray[i] = objectArray[i+1];
 			}
@@ -37,11 +32,9 @@ public class ArrayList implements List {
 
 	public ReturnObject add(int index, Object item) {
 		ReturnObject array = new ReturnObjectImpl(item);
-		if (index < 0 || index >= size()) {
-			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
-		}else if (item == null) {
-			((ReturnObjectImpl)array).setError(ErrorMessage.INVALID_ARGUMENT);
-		}else {
+		((ReturnObjectImpl)array).setOOB(size(), index);
+		((ReturnObjectImpl)array).setInvalid(item);
+		if(array.getError() == ErrorMessage.NO_ERROR){
 			if (isFull()) {
 				moreSpace();
 			}
@@ -58,9 +51,8 @@ public class ArrayList implements List {
 
 	public ReturnObject add(Object item) {
 		ReturnObject array = new ReturnObjectImpl(item);
-		if (item == null) {
-			((ReturnObjectImpl)array).setError(ErrorMessage.INVALID_ARGUMENT);
-		}else{
+		((ReturnObjectImpl)array).setInvalid(item);
+		if(array.getError() == ErrorMessage.NO_ERROR){
 			if (isFull()) {
 				moreSpace();
 			}
