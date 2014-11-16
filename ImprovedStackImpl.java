@@ -1,8 +1,8 @@
 public class ImprovedStackImpl implements ImprovedStack {
-	private Stack providedStack;
+	private AbstractStack providedStack;
 
 	public ImprovedStackImpl(List list) {
-		this.providedStack = StackImpl(list);
+		this.providedStack = new StackImpl(list);
 	}
 
 	public boolean isEmpty() {
@@ -37,7 +37,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 
 	public void remove (Object object) {
 		for (int i = 0; i < size(); i++) {
-			if (providedStack.internalList.get(i).equals(object) {
+			if (providedStack.internalList.get(i).equals(object)) {
 				providedStack.internalList.remove(i);
 			}
 		}
