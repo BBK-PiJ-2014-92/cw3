@@ -13,18 +13,21 @@ public class ArrayList implements List {
 	public ReturnObject get(int index) {
 		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
 		if (isEmpty()) {
-			array.setError(ErrorMessage.EMPTY_STRUCTURE);
+			((ReturnObjectImpl)array).setError(ErrorMessage.EMPTY_STRUCTURE);
 		}else if (index < 0 || index >= size()) {
-			array.setError(ErrorMessage.OUT_OF_BOUNDS);
+			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+		}
 		return array;
 	}
 
 	public ReturnObject remove(int index) {
 		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
 		if (isEmpty()) {
-			return array.setError(ErrorMessage.EMPTY_STRUCTURE);
+			((ReturnObjectImpl)array).setError(ErrorMessage.EMPTY_STRUCTURE);
+			return array;
 		}else if (index < 0 || index >= size()) {
-			return array.setError(ErrorMessage.OUT_OF_BOUNDS);
+			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+			return array;
 		}else{
 			for(int i = index; i < size(); i++) {
 				objectArray[i] = objectArray[i+1];
@@ -37,9 +40,11 @@ public class ArrayList implements List {
 	public ReturnObject add(int index, Object item) {
 		ReturnObject array = new ReturnObjectImpl(item);
 		if (index < 0 || index >= size()) {
-			return array.setError(ErrorMessage.OUT_OF_BOUNDS);
+			((ReturnObjectImpl)array).setError(ErrorMessage.INDEX_OUT_OF_BOUNDS);
+			return array;
 		}else if (item == null) {
-			return array.setError(ErrorMessage.INVALID_ARGUMENT);
+			((ReturnObjectImpl)array).setError(ErrorMessage.INVALID_ARGUMENT);
+			return array;
 		}else {
 			if (isFull()) {
 				moreSpace();
@@ -57,13 +62,14 @@ public class ArrayList implements List {
 	public ReturnObject add(Object item) {
 		ReturnObject array = new ReturnObjectImpl(item);
 		if (item == null) {
-			return array.setError(ErrorMessage.INVALID_ARGUMENT);
+			((ReturnObjectImpl)array).setError(ErrorMessage.INVALID_ARGUMENT);
+			return array;
 		}else{
 			if (isFull()) {
 				moreSpace();
 			}
 			objectArray[size()] = item;
-			size++
+			size++;
 			return null;
 		}
 		
@@ -80,6 +86,4 @@ public class ArrayList implements List {
 		}
 		objectArray = bigObjectArray;
 	}
-	
-	private void
 }
