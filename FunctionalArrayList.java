@@ -6,7 +6,7 @@ public class FunctionalArrayList extends ArrayList implements FunctionalList {
 	}
 
 	public FunctionalList rest() {
-		FunctionalArrayList result = new FunctionalArrayList();
+		FunctionalList result = new FunctionalArrayList();
 		for (int i = 1; i < size(); i++) {
 			result.add(get(i).getReturnValue());
 		}

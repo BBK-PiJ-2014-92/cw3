@@ -6,7 +6,7 @@ public class FunctionalLinkedList extends LinkedList implements FunctionalList {
 	}
 
 	public FunctionalList rest() {
-		FunctionalLinkedList result = new FunctionalLinkedList();
+		FunctionalList result = new FunctionalLinkedList();
 		for (int i = 1; i < size(); i++) {
 			result.add(get(i).getReturnValue());
 		}
