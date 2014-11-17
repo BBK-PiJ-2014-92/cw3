@@ -40,30 +40,30 @@ public class LinkedListTest{
 	public void addTest2() {
 		linked.add(0, 1);
 		Object actual = linked.get(0).getReturnValue();
-		assertNull(actual); 
+		assertNull(actual); //works
 		
 		linked.add(0);
 		linked.add(0, "head");
 		actual = linked.get(0).getReturnValue();
 		Object expected = "head";
-		assertEquals(actual, expected); 
+		assertEquals(actual, expected); //works
 		
 		actual = linked.get(1).getReturnValue();
 		expected = 0;
-		assertEquals(actual, expected); 
+		assertEquals(actual, expected); //works
 		
 		linked.add(1, null);
 		actual = linked.get(1).getReturnValue();
-		assertNotNull(actual); 
+		assertNotNull(actual); //works
 		
 		linked.add(5, "OutOfBounds");
 		actual = linked.get(5).getReturnValue();
-		assertNull(actual); 
+		assertNull(actual); //works
 		
 		linked.add(1, "second");
 		actual = linked.get(2).getReturnValue();
 		expected = 0;
-		assertEquals(actual, expected); 
+		assertEquals(actual, expected); //works
 		
 		linked.add(4); //stored in 3
 		linked.add(5); //stored in 4
@@ -76,32 +76,32 @@ public class LinkedListTest{
 		linked.add("Is this full yet?");
 		actual = linked.get(10).getReturnValue();
 		expected = "Is this full yet?";
-		assertEquals(actual, expected); 
+		assertEquals(actual, expected); //works
 		
 		linked.add(10, "How about now?");
 		actual = linked.get(11).getReturnValue();
-		assertEquals(actual, expected); 
+		assertEquals(actual, expected); //works
 		
 		actual = linked.add("give me null or give me death").getReturnValue();
-		assertNull(actual); 
+		assertNull(actual); //works
 		
 		actual = linked.add(10, "another null test").getReturnValue();
-		assertNull(actual); 
+		assertNull(actual); //works
 	}
-	//@Test
-	//public void emptyTest() {
-		//boolean actual = linked.isEmpty();
-		//assertTrue(actual); 
+	@Test
+	public void emptyTest() {
+		boolean actual = linked.isEmpty();
+		assertTrue(actual); 
 		
-		//linked.add("Not empty");
-		//actual = linked.isEmpty();
-		//assertFalse(actual); 
+		linked.add("Not empty");
+		actual = linked.isEmpty();
+		assertFalse(actual); 
 		
-		//linked.remove(0);
-		//actual = linked.isEmpty();
-		//assertTrue(actual); 
+		linked.remove(0);
+		actual = linked.isEmpty();
+		assertTrue(actual); 
 
-	//}
+	}
 
 	//@Test
 	//public void sizeTest() {
