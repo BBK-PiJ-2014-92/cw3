@@ -91,58 +91,58 @@ public class LinkedListTest{
 	@Test
 	public void emptyTest() {
 		boolean actual = linked.isEmpty();
-		assertTrue(actual); 
+		assertTrue(actual); //works
 		
 		linked.add("Not empty");
 		actual = linked.isEmpty();
-		assertFalse(actual); 
+		assertFalse(actual); //works
 		
 		linked.remove(0);
 		actual = linked.isEmpty();
-		assertTrue(actual); 
+		assertTrue(actual); //works
 
 	}
 
-	//@Test
-	//public void sizeTest() {
-		//int actual = linked.size();
-		//int expected = 0;
-		//assertEquals(actual, expected); 
+	@Test
+	public void sizeTest() {
+		int actual = linked.size();
+		int expected = 0;
+		assertEquals(actual, expected); //works
 		
-		//linked.add("size 1");
-		//actual = linked.size();
-		//expected = 1;
-		//assertEquals(actual, expected); 
+		linked.add("size 1");
+		actual = linked.size();
+		expected = 1;
+		assertEquals(actual, expected); //works
 		
-		//linked.remove(0);
-		//actual = linked.size();
-		//expected = 0;
-		//assertEquals(actual, expected); 
+		linked.remove(0);
+		actual = linked.size();
+		expected = 0;
+		assertEquals(actual, expected); //works
 		
-		//linked.remove(0);
-		//actual = linked.size();
-		//assertEquals(actual, expected); 
+		linked.remove(0);
+		actual = linked.size();
+		assertEquals(actual, expected); //works
 		
-	//}
+	}
 	
-	//@Test
-	//public void removeTest() {
-		//linked.add(0);
-		//linked.add(1);
-		//linked.add(2);
-		//linked.add(3);
-		//linked.remove(3);
-		//Object actual = linked.get(3).getReturnValue();
-		//assertNull(actual); 
+	@Test
+	public void removeTest() {
+		linked.add(0);
+		linked.add(1);
+		linked.add(2);
+		linked.add(3);
+		linked.remove(3);
+		Object actual = linked.get(3).getReturnValue();
+		assertNull(actual); //works
 		
-		//linked.remove(0);
-		//actual = linked.get(0).getReturnValue();
-		//Object expected = 1;
-		//assertEquals(actual, expected); 
+		linked.remove(0);
+		actual = linked.get(0).getReturnValue();
+		Object expected = 1;
+		assertEquals(actual, expected); //works
 		
-		//actual = linked.remove(2).getReturnValue();
-		//assertNull(actual); 
+		actual = linked.remove(2).getReturnValue();
+		assertNull(actual); //works
 		
-	//}
+	}
 
 }
