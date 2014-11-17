@@ -35,6 +35,20 @@ public class FunctionalTest {
 	public void testHead() {
 		Object actual = linked.head().getReturnValue();
 		Object expected = 0;
-		assertEquals(actual, expected);
+		assertEquals(actual, expected); //works
+		
+		actual = array.head().getReturnValue();
+		assertEquals(actual, expected); //works
+	}
+	
+	@Test
+	public void testRest() {
+		Object actual = array.rest().size();
+		Object expected = 4;
+		assertEquals(actual, expected); //works
+		
+		actual = array.rest().size();
+		assertEquals(actual, expected); //works
+		
 	}
 }
