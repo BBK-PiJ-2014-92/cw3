@@ -26,7 +26,8 @@ public class ImprovedStackImpl implements ImprovedStack {
 	}
 
 	public ImprovedStack reverse() {
-		ImprovedStack reversed = new ImprovedStackImpl(providedStack.internalList);
+		List list = new ArrayList();
+		ImprovedStack reversed = new ImprovedStackImpl(list);
 		Object item;
 		for (int i = size() - 1; i >= 0; i--) {
 			item = providedStack.internalList.get(i);
