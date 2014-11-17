@@ -8,7 +8,7 @@ public class LinkedList implements List {
 	}
 
 	public boolean isEmpty() {
-		return (size() == 0);
+		return (listHead == null);
 	}
 
 	public int size() {
@@ -17,23 +17,21 @@ public class LinkedList implements List {
 
 	public ReturnObject get(int index) {
 		Node tempNode = listHead;
-		ReturnObject linked = new ReturnObjectImpl(tempNode);
+		ReturnObject linked = new ReturnObjectImpl(null);
 		((ReturnObjectImpl)linked).setEmpty(isEmpty());
 		((ReturnObjectImpl)linked).setOOB(size(), index);
 		if (linked.getError() == ErrorMessage.NO_ERROR) {		
 			for (int i = 0; i < index; i++) {
 				tempNode = tempNode.getNextNode();
 			}
-			linked = new ReturnObjectImpl(tempNode);
+			linked = new ReturnObjectImpl(tempNode.getValue());
 		}
 		return linked;
 	}
 
 	public ReturnObject remove(int index) {
 		Node tempNode = listHead;
-		ReturnObject linked = new ReturnObjectImpl(tempNode);
-		((ReturnObjectImpl)linked).setEmpty(isEmpty());
-		((ReturnObjectImpl)linked).setOOB(size(), index);
+		ReturnObject linked = get(index);
 		if (linked.getError() == ErrorMessage.NO_ERROR) {
 			if (index == 0) {
 				listHead = listHead.getNextNode();
@@ -46,7 +44,7 @@ public class LinkedList implements List {
 				Node removedNode = tempNode.getNextNode();
 				tempNode.setNextNode(removedNode.getNextNode());
 				removedNode.setNextNode(null);
-				linked = new ReturnObjectImpl(removedNode);
+				linked = new ReturnObjectImpl(removedNode.getValue());
 				size--;
 			}
 		}
@@ -55,7 +53,7 @@ public class LinkedList implements List {
 
 	public ReturnObject add(int index, Object item) {
 		Node tempNode = listHead;
-		ReturnObject linked = new ReturnObjectImpl(tempNode);
+		ReturnObject linked = new ReturnObjectImpl(item);
 		((ReturnObjectImpl)linked).setOOB(size(), index);
 		((ReturnObjectImpl)linked).setInvalid(item);
 		if (linked.getError() == ErrorMessage.NO_ERROR) {
@@ -80,16 +78,21 @@ public class LinkedList implements List {
 
 	public ReturnObject add(Object item) {
 		Node tempNode = listHead;
-		ReturnObject linked = new ReturnObjectImpl(tempNode);
+		Node newNode = new Node(item);
+		ReturnObject linked = new ReturnObjectImpl(item);
 		((ReturnObjectImpl)linked).setInvalid(item);
 		if (linked.getError() == ErrorMessage.NO_ERROR) {
-			Node newNode = new Node(item);
-			while (tempNode.getNextNode() != null) {
-				tempNode = tempNode.getNextNode();
+			if (listHead != null) {
+				while (tempNode.getNextNode() != null) {
+					tempNode = tempNode.getNextNode();
+				}
+				tempNode.setNextNode(newNode);
+				linked = new ReturnObjectImpl(null);
+				size++;
+			}else {
+				listHead = newNode;
+				size++;
 			}
-			tempNode.setNextNode(newNode);
-			linked = new ReturnObjectImpl(null);
-			size++;
 		}
 		return linked;
 	}
