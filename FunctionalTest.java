@@ -47,8 +47,26 @@ public class FunctionalTest {
 		Object expected = 4;
 		assertEquals(actual, expected); //works
 		
-		actual = array.rest().size();
+		actual = linked.rest().size();
 		assertEquals(actual, expected); //works
 		
+		array.remove(0);
+		array.remove(0);
+		array.remove(0);
+		array.remove(0);
+		array.remove(0);
+		
+		actual = array.rest().size();
+		expected = 0;
+		assertEquals(actual, expected); //works
+		
+		linked.remove(0);
+		linked.remove(0);
+		linked.remove(0);
+		linked.remove(0);
+		linked.remove(0);
+		
+		actual = linked.rest().size();
+		assertEquals(actual, expected); //works
 	}
 }
