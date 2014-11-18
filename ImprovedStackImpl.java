@@ -1,9 +1,10 @@
 public class ImprovedStackImpl implements ImprovedStack {
-	private List providedList = new FunctionalArrayList();
+	private List providedList;
 	private AbstractStack providedStack;
 
 	public ImprovedStackImpl() {
-		this.providedStack = new StackImpl(providedList);
+		providedList = new FunctionalLinkedList();
+		providedStack = new StackImpl(providedList);
 	}
 
 	public boolean isEmpty() {
@@ -27,7 +28,6 @@ public class ImprovedStackImpl implements ImprovedStack {
 	}
 
 	public ImprovedStack reverse() {
-		List list = new ArrayList();
 		ImprovedStack reversed = new ImprovedStackImpl();
 		Object item;
 		for (int i = size() - 1; i >= 0; i--) {
@@ -38,9 +38,12 @@ public class ImprovedStackImpl implements ImprovedStack {
 	}
 
 	public void remove (Object object) {
+		Object item;
 		for (int i = 0; i < size(); i++) {
-			if (providedStack.internalList.get(i).getReturnValue().equals(object)) {
+			item = providedStack.internalList.get(i).getReturnValue();
+			if (item.equals(object)) {
 				providedStack.internalList.remove(i);
+				i--;
 			}
 		}
 	}
