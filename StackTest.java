@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 public class StackTest {
 	private Stack stackA;
 	private Stack stackL;
-	private Stack improvedStack;
+	private ImprovedStack improvedStack;
 	private List array;
 	private List linked;
 	
@@ -195,6 +195,41 @@ public class StackTest {
 		assertNull(actual); //works
 	}
 	
-	//@Test
-	//public void reverse()
+	@Test
+	public void reverseTest() {
+		ImprovedStack reverse = improvedStack.reverse();
+		Object actual = reverse.top().getReturnValue();
+		Object expected = 0;
+		assertEquals(actual, expected); //works
+		
+		improvedStack.pop();
+		improvedStack.pop();
+		improvedStack.pop();
+		improvedStack.pop();
+		improvedStack.pop();
+		reverse = improvedStack.reverse();
+		actual = reverse.top().getReturnValue();
+		assertNull(actual); //works
+	}
+	
+	@Test
+	public void removeTest() {
+		improvedStack.push(4);
+		improvedStack.push(4);
+		
+		improvedStack.remove(4);
+		
+		Object actual = improvedStack.size();
+		Object expected = 4;
+		assertEquals(actual, expected); //works
+		
+		improvedStack.push(0);
+		improvedStack.push(1);
+		improvedStack.remove(1);
+		improvedStack.remove(0);
+		
+		actual = improvedStack.size();
+		expected = 2;
+		assertEquals(actual, expected); //works
+	}
 }
