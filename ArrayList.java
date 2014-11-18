@@ -11,16 +11,20 @@ public class ArrayList implements List {
 	}
 
 	public ReturnObject get(int index) {
-		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
+		if(isFull()) {
+			moreSpace();
+		}
+		ReturnObject array = new ReturnObjectImpl(null);
 		((ReturnObjectImpl)array).setEmpty(isEmpty());
 		((ReturnObjectImpl)array).setOOB(size(), index);
+		if(array.getError() == ErrorMessage.NO_ERROR) {
+			array = new ReturnObjectImpl(objectArray[index]);
+		}
 		return array;
 	}
 
 	public ReturnObject remove(int index) {
-		ReturnObject array = new ReturnObjectImpl(objectArray[index]);
-		((ReturnObjectImpl)array).setEmpty(isEmpty());
-		((ReturnObjectImpl)array).setOOB(size(), index);
+		ReturnObject array = get(index);
 		if (array.getError() == ErrorMessage.NO_ERROR) {
 			for(int i = index; i < size(); i++) {
 				objectArray[i] = objectArray[i+1];
