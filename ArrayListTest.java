@@ -35,6 +35,10 @@ public class ArrayListTest{
 		actual = arrayTest.get(2).getReturnValue();
 		expected = "test";
 		assertEquals(actual, expected); //works
+		
+		arrayTest.add(10, "out of bounds");
+		actual = arrayTest.get(10).getReturnValue();
+		assertNull(actual); //works
 	}
 	
 	@Test
@@ -144,6 +148,19 @@ public class ArrayListTest{
 		actual = arrayTest.remove(2).getReturnValue();
 		assertNull(actual); //works
 
+	}
+	
+	@Test
+	public void removeTest2() {
+		arrayTest.remove(0);
+		boolean actual = arrayTest.isEmpty();
+		assertTrue(actual); //works
+		
+		arrayTest.add(0);
+		
+		Object error = arrayTest.remove(10).getError();
+		Object expected = ErrorMessage.INDEX_OUT_OF_BOUNDS;
+		assertEquals(error, expected); //works
 	}
 
 }
