@@ -8,7 +8,7 @@ public class LinkedList implements List {
 	}
 
 	public boolean isEmpty() {
-		return (listHead == null && size() == 0);
+		return (listHead == null);
 	}
 
 	public int size() {
@@ -34,8 +34,8 @@ public class LinkedList implements List {
 		ReturnObject linked = get(index);
 		if (linked.getError() == ErrorMessage.NO_ERROR) {
 			if (index == 0) {
-				listHead = listHead.getNextNode();
 				linked = new ReturnObjectImpl(listHead);
+				listHead = listHead.getNextNode();
 				size--;
 			}else {
 				for (int i = 0; i < index - 1; i++) {
@@ -53,25 +53,31 @@ public class LinkedList implements List {
 
 	public ReturnObject add(int index, Object item) {
 		Node tempNode = listHead;
-		ReturnObject linked = new ReturnObjectImpl(item);
-		((ReturnObjectImpl)linked).setOOB(size(), index);
-		((ReturnObjectImpl)linked).setInvalid(item);
-		if (linked.getError() == ErrorMessage.NO_ERROR) {
-			Node newNode = new Node(item);
-			if (index == 0) {
-				newNode.setNextNode(tempNode);
-				listHead = newNode;
-				linked = new ReturnObjectImpl(null);
-				size++;
-			}else {
-				for (int i = 0; i < index - 1; i++) {
-					tempNode = tempNode.getNextNode();
-				}
-				newNode.setNextNode(tempNode.getNextNode());
-				tempNode.setNextNode(newNode);
-				linked = new ReturnObjectImpl(null);
-				size++;
+		ReturnObject linked;
+		if (index == 0 && isEmpty()) {
+			linked.add(item);
+		} else{ 
+			linked = new ReturnObjectImpl(item);
+			((ReturnObjectImpl)linked).setOOB(size(), index);
+			((ReturnObjectImpl)linked).setInvalid(item);
+			if (linked.getError() == ErrorMessage.NO_ERROR) {
+				Node newNode = new Node(item);
+				if (index == 0) {
+					newNode.setNextNode(tempNode);
+					listHead = newNode;
+					linked = new ReturnObjectImpl(null);
+					size++;
+				}else {
+					for (int i = 0; i < index - 1; i++) {
+						tempNode = tempNode.getNextNode();
+					}
+					newNode.setNextNode(tempNode.getNextNode());
+					tempNode.setNextNode(newNode);
+					linked = new ReturnObjectImpl(null);
+					size++;
+				}			
 			}
+
 		}
 		return linked;
 	}

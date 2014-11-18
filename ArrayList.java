@@ -35,20 +35,26 @@ public class ArrayList implements List {
 	}
 
 	public ReturnObject add(int index, Object item) {
-		ReturnObject array = new ReturnObjectImpl(item);
-		((ReturnObjectImpl)array).setOOB(size(), index);
-		((ReturnObjectImpl)array).setInvalid(item);
-		if(array.getError() == ErrorMessage.NO_ERROR){
-			if (isFull()) {
-				moreSpace();
+		ReturnObject array;
+		if (index == 0 && isEmpty()) {
+			array = add(item);
+		}else {
+			array = new ReturnObjectImpl(item);
+			((ReturnObjectImpl)array).setOOB(size(), index);
+			((ReturnObjectImpl)array).setInvalid(item);
+			if(array.getError() == ErrorMessage.NO_ERROR){
+				if (isFull()) {
+					moreSpace();
+				}
+				for (int i = index; i < size(); i++) {
+					objectArray[i+1] = objectArray[i];
+				}
+				objectArray[index] = item;
+				size++;
+				array = new ReturnObjectImpl(null);
 			}
-			for (int i = index; i < size(); i++) {
-				objectArray[i+1] = objectArray[i];
-			}
-			objectArray[index] = item;
-			size++;
-			array = new ReturnObjectImpl(null);
 		}
+
 		return array;
 	}
 	
