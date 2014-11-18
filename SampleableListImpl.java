@@ -4,7 +4,7 @@ public class SampleableListImpl extends AbstractList implements SampleableList {
 	}
 
 	public SampleableList sample() {
-		List list = new ArrayList();
+		List list = new FunctionalLinkedList();
 		SampleableList sample = new SampleableListImpl (list);
 		if(isEmpty()) {
 			return sample;
