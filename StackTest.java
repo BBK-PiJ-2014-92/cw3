@@ -231,5 +231,13 @@ public class StackTest {
 		actual = improvedStack.size();
 		expected = 2;
 		assertEquals(actual, expected); //works
+		
+		improvedStack.remove(2);
+		improvedStack.remove(3);
+		improvedStack.remove(0);
+		
+		actual = improvedStack.size();
+		expected = 0;
+		assertEquals(actual, expected); //works
 	}
 }

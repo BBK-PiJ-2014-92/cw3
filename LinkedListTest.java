@@ -151,6 +151,11 @@ public class LinkedListTest{
 		actual = linked.remove(2).getReturnValue();
 		assertNull(actual); //works
 		
+		
+		actual = linked.remove(-1).getError();
+		expected = ErrorMessage.INDEX_OUT_OF_BOUNDS;
+		assertEquals(actual, expected); //works
+		
 	}
 	
 	@Test
