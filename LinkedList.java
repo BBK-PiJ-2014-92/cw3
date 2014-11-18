@@ -55,7 +55,7 @@ public class LinkedList implements List {
 		Node tempNode = listHead;
 		ReturnObject linked;
 		if (index == 0 && isEmpty()) {
-			linked.add(item);
+			linked = add(item);
 		} else{ 
 			linked = new ReturnObjectImpl(item);
 			((ReturnObjectImpl)linked).setOOB(size(), index);
