@@ -14,7 +14,7 @@ public class ImprovedStackImpl implements ImprovedStack {
 	}
 
 	public void push(Object item) {
-		providedStack.push(item);
+		providedStack.add(item);
 	}
 
 	public ReturnObject top() {
