@@ -23,7 +23,8 @@ public class StackImpl extends AbstractStack implements Stack {
 	}
 
 	public ReturnObject pop() {
-		size--
-		return internalList.remove(size - 1);
+		ReturnObject result = internalList.remove(size - 1);
+		size--;
+		return result;
 	}
 }
