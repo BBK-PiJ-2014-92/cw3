@@ -43,13 +43,9 @@ public class ArrayListTest{
 	
 	@Test
 	public void addTest2() {
-		arrayTest.add(0, 1);
-		Object actual = arrayTest.get(0).getReturnValue();
-		assertNull(actual); //works
-		
 		arrayTest.add(0);
 		arrayTest.add(0, "head");
-		actual = arrayTest.get(0).getReturnValue();
+		Object actual = arrayTest.get(0).getReturnValue();
 		Object expected = "head";
 		assertEquals(actual, expected); //works
 		
@@ -92,6 +88,14 @@ public class ArrayListTest{
 		
 		actual = arrayTest.add(10, "another null test").getReturnValue();
 		assertNull(actual); //works
+	}
+	
+	@Test
+	public void addTest3() {
+		arrayTest.add(0, 1);
+		Object actual = arrayTest.get(0).getReturnValue();
+		Object expected = 1;
+		assertEquals(actual, expected); //works
 	}
 	@Test
 	public void emptyTest() {

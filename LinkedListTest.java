@@ -33,18 +33,18 @@ public class LinkedListTest{
 		actual = linked.get(2).getReturnValue();
 		expected = "test";
 		assertEquals(actual, expected); //works
+		
+		linked.add(10, "out of bounds");
+		actual = linked.get(10).getReturnValue();
+		assertNull(actual); //works
 
 	}
 	
 	@Test
 	public void addTest2() {
-		linked.add(0, 1);
-		Object actual = linked.get(0).getReturnValue();
-		assertNull(actual); //works
-		
 		linked.add(0);
 		linked.add(0, "head");
-		actual = linked.get(0).getReturnValue();
+		Object actual = linked.get(0).getReturnValue();
 		Object expected = "head";
 		assertEquals(actual, expected); //works
 		
@@ -87,6 +87,14 @@ public class LinkedListTest{
 		
 		actual = linked.add(10, "another null test").getReturnValue();
 		assertNull(actual); //works
+	}
+	
+	@Test
+	public void addTest3() {
+		linked.add(0, 1);
+		Object actual = linked.get(0).getReturnValue();
+		Object expected = 1;
+		assertEquals(actual, expected); //works
 	}
 	@Test
 	public void emptyTest() {
@@ -143,6 +151,19 @@ public class LinkedListTest{
 		actual = linked.remove(2).getReturnValue();
 		assertNull(actual); //works
 		
+	}
+	
+	@Test
+	public void removeTest2() {
+		linked.remove(0);
+		boolean actual = linked.isEmpty();
+		assertTrue(actual); //works
+		
+		linked.add(0);
+		
+		Object error = linked.remove(10).getError();
+		Object expected = ErrorMessage.INDEX_OUT_OF_BOUNDS;
+		assertEquals(error, expected); //works
 	}
 
 }
