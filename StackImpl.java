@@ -1,30 +1,27 @@
 public class StackImpl extends AbstractStack implements Stack {
-	private int size;
 
 	public StackImpl(List list) {
 		super(list);
 	}
 
 	public boolean isEmpty() {
-		return (size() == 0);
+		return (internalList.isEmpty());
 	}
 
 	public int size() {
-		return size;
+		return internalList.size();
 	}
 
 	public void push(Object item) {
 		internalList.add(item);
-		size++;
 	}
 
 	public ReturnObject top() {
-		return internalList.get(size - 1);
+		return internalList.get(size() - 1);
 	}
 
 	public ReturnObject pop() {
-		ReturnObject result = internalList.remove(size - 1);
-		size--;
+		ReturnObject result = internalList.remove(size() - 1);
 		return result;
 	}
 }
