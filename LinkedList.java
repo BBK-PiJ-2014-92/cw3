@@ -8,7 +8,7 @@ public class LinkedList implements List {
 	}
 
 	public boolean isEmpty() {
-		return (listHead == null);
+		return (listHead == null && size() == 0);
 	}
 
 	public int size() {
