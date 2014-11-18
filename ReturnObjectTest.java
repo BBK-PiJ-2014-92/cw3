@@ -28,55 +28,55 @@ public class ReturnObjectTest {
 	@Test
 	public void testNoError() {
 		ErrorMessage actual = test.getError();
-		assertEquals(actual, noError);
+		assertEquals(actual, noError); //works
 
 	}
 
 	@Test
 	public void testEmpty() {
-		test.setErrorList(true, 10, 5, words);
-		ErrorMessage actual = test.getError();
-		assertEquals(actual, empty);
-
-		test.setErrorList(true, 10, 5);
-		actual = test.getError();
-		assertEquals(actual, empty);
-
-		test.setErrorList(true, 10, words);
-		assertEquals(actual, empty);
+		test.setEmpty(true);
+		Object actual = test.getError();
+		assertEquals(actual, empty); //works
+		
+		actual = test.getReturnValue();
+		assertNull(actual); //works
 	}
 
 	@Test
 	public void testOOB() {
-		test.setErrorList(false, 5, 10);
-		ErrorMessage actual = test.getError();
-		assertEquals(actual, oob);
+		int size = 11;
+		int index = 12;
+		test.setOOB(size, index);
+		Object actual = test.getError();
+		assertEquals(actual, oob); //works
 
-		test.setErrorList(false, 5, 10, words);
-		actual = test.getError();
-		assertEquals(actual, oob);
+		actual = test.getReturnValue();
+		assertNull(actual); //works
 	}
 
 	@Test
 	public void testInv() {
-		test.setErrorList(false, 10, 5, null);
-		ErrorMessage actual = test.getError();
-		assertEquals(actual, invalid);
+		test.setInvalid(null);
+		Object actual = test.getError();
+		assertEquals(actual, invalid); //works
 
 		words = null;
-		test.setErrorList(false, 10, words);
-		assertEquals(actual, invalid);
+		test.setInvalid(words);
+		assertEquals(actual, invalid); //works
+		
+		actual = test.getReturnValue();
+		assertNull(actual); //works
 	}
 
 	@Test
 	public void testGetReturnValue() {
 		Object actual = test.getReturnValue();
 		Object expected = "Test";
-		assertEquals(actual, expected);
+		assertEquals(actual, expected); //works
 
 		testEmpty();
 		actual = test.getReturnValue();
 		expected = null;
-		assertEquals(actual, expected);
+		assertEquals(actual, expected); //works
 	}
 }
